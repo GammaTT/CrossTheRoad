@@ -19,8 +19,7 @@ public class ObstacleController : MonoBehaviour
 
     Transform myTransform;
 
-    [Header("Debug")]
-    public GameObject des;
+    public GameObject mesh;
 
     public bool IsGoindRight
     {
@@ -39,6 +38,8 @@ public class ObstacleController : MonoBehaviour
     {
         myTransform = transform;
         moveDirectionChange += SetDestination;
+
+        mesh = transform.GetChild(0).gameObject;
 
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
     }
@@ -77,13 +78,15 @@ public class ObstacleController : MonoBehaviour
         if (isGoindRight)
         {
             targetPosition.x += moveDistance;
+            mesh.transform.eulerAngles = new Vector3(0, 90, 0);
         }
         else
         {
             targetPosition.x -= moveDistance;
+            mesh.transform.eulerAngles = new Vector3(0, -90, 0);
         }
 
-        des.transform.position = targetPosition;
+        //des.transform.position = targetPosition;
     }
 
 
