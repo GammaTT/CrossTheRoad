@@ -21,18 +21,6 @@ public class PlayerController : MonoBehaviour
         targetPosition = transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         // 목표 위치에 도달할 때까지 이동

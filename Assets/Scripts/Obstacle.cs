@@ -11,15 +11,12 @@ public class Obstacle : MonoBehaviour
         obstacleController = GetComponent<ObstacleController>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.TryGetComponent(out Player player))
+        {
+            GameManager.Instance.GameOver();
+            gameObject.SetActive(false);
+        }
     }
 }

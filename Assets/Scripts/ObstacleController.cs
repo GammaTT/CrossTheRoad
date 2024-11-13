@@ -15,7 +15,7 @@ public class ObstacleController : MonoBehaviour
 
     Action moveDirectionChange;
 
-    Vector3 targetPosition;
+    public Vector3 targetPosition;
 
     Transform myTransform;
 
@@ -37,56 +37,53 @@ public class ObstacleController : MonoBehaviour
     private void Awake()
     {
         myTransform = transform;
-        moveDirectionChange += SetDestination;
+        //moveDirectionChange += SetDestination;
 
         mesh = transform.GetChild(0).gameObject;
 
         moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        IsGoindRight = false;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Vector3.Distance(myTransform.position, targetPosition) > 0.1f))
+        if (Mathf.Abs(myTransform.position.x - targetPosition.x) > 0.1f)
         {
-            myTransform.position += (targetPosition - myTransform.position).normalized
-                * Time.deltaTime * moveSpeed;
+            /*myTransform.position += (targetPosition - myTransform.position).normalized
+                * Time.deltaTime * moveSpeed;*/
+
+            myTransform.position += (new Vector3(1.0f, 0, 0) * Time.deltaTime * moveSpeed);
         }
         else
         {
-            IsGoindRight = !IsGoindRight;
+            //gameObject.SetActive(false);
         }
     }
 
-    //테스트를 위함
-    private void OnValidate()
+    public void SetDestination(Vector3 destination, bool right)
     {
-        moveDirectionChange?.Invoke();
-    }
-
-    public void SetDestination()
-    {
-        targetPosition = transform.position;
-
+        targetPosition = destination;
+        isGoindRight = right;
 
         if (isGoindRight)
         {
-            targetPosition.x += moveDistance;
+            //targetPosition.x += moveDistance;
             mesh.transform.eulerAngles = new Vector3(0, 90, 0);
         }
         else
         {
-            targetPosition.x -= moveDistance;
+            //targetPosition.x -= moveDistance;
+            moveSpeed *= -1;
             mesh.transform.eulerAngles = new Vector3(0, -90, 0);
         }
 
-        //des.transform.position = targetPosition;
+        Invoke("Deactivate", 5f);
+    }
+
+    public void Deactivate()
+    {
+        this.gameObject.SetActive(false);
     }
 
 

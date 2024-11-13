@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class SpawnObstacle : MonoBehaviour
 {
@@ -12,8 +14,8 @@ public class SpawnObstacle : MonoBehaviour
 
     Vector3[] spawnPosition = new Vector3[2];
 
-    Vector3 SpawnPosition1;
-    Vector3 SpawnPosition2;
+    Vector3 spawnPosition1 => player.transform.position + new Vector3(-spawnDistance, 0, 0);
+    Vector3 spawnPosition2 => player.transform.position + new Vector3(+spawnDistance, 0, 0);
 
     public float spawnDistance;
     public ObjectPool ObjectPool;
@@ -23,33 +25,48 @@ public class SpawnObstacle : MonoBehaviour
         ObjectPool = GetComponent<ObjectPool>();
     }
 
+    private void Initialize()
+    {
+        player = GameManager.Instance.player;
+        playerTransform = player.transform;
+
+        StartCoroutine(SpawnCar());
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = player.transform;
+        GameManager.Instance.GameInit += Initialize;
 
-        spawnPosition[0] = playerTransform.position + new Vector3(-spawnDistance, 0, 0);
-        spawnPosition[1] = playerTransform.position + new Vector3(spawnDistance, 0, 0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator SpawnCar()
     {
+        float[] zOffsets = { -4, -2, 2, 4, 6, 8 }; // Z축 오프셋 배열
+
+        yield return new WaitForSeconds(0.5f);
+
         while (true)
         {
-            GameObject obj = ObjectPool.SpawnFromPool("CarObstacle");
+            foreach (float zOffset in zOffsets)
+            {
+                GameObject obj = ObjectPool.SpawnFromPool("CarObstacle");
 
-            int rand = Random.Range(0, spawnPosition.Length);
+                bool isRight = (Random.Range(0, 2) == 0);
 
-            obj.transform.position = spawnPosition[rand];
+                if (isRight)
+                {
+                    obj.transform.position = spawnPosition1 + new Vector3(0, 0, zOffset);
+                    obj.GetComponent<ObstacleController>().SetDestination(spawnPosition2, true);
+                }
+                else
+                {
+                    obj.transform.position = spawnPosition2 + new Vector3(0, 0, zOffset);
+                    obj.GetComponent<ObstacleController>().SetDestination(spawnPosition1, false);
+                }
 
-            //0 이면 왼쪽에서 오른쪽
-            //1이면 오른쪽에서 왼쪽
+                Debug.Log("foreach");
+            }
 
             yield return new WaitForSeconds(spawnCarDelay);
         }
