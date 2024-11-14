@@ -8,5 +8,10 @@ public class ObstacleData : ScriptableObject
     public float minSpeed;
     public float maxSpeed;
 
-    //public List<>
+    public GameObject originPrefab;
+    public List<GameObject> carPrefabs;
+
+    public Vector3 boxColliderSize;
+    public Vector3 boxColliderCenter;
+    public bool boxColliderIsTrigger;
 }

@@ -15,10 +15,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetPosition;
     private bool isMoving = false;
 
+    public Action MoveAction;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         targetPosition = transform.position;
+    }
+
+    private void Start()
+    {
+        isMoving = false;
     }
 
     private void FixedUpdate()
@@ -75,6 +81,7 @@ public class PlayerController : MonoBehaviour
             curMoveInput = context.ReadValue<Vector2>();
             SetDirection(context.control.name);
             Move();
+            MoveAction?.Invoke();
         }
         else if (context.phase == InputActionPhase.Canceled)
         {

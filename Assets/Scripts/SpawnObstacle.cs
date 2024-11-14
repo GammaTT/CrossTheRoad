@@ -12,8 +12,6 @@ public class SpawnObstacle : MonoBehaviour
 
     [SerializeField] private float spawnCarDelay;
 
-    Vector3[] spawnPosition = new Vector3[2];
-
     Vector3 spawnPosition1 => player.transform.position + new Vector3(-spawnDistance, 0, 0);
     Vector3 spawnPosition2 => player.transform.position + new Vector3(+spawnDistance, 0, 0);
 
@@ -36,13 +34,14 @@ public class SpawnObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.GameInit += Initialize;
-
+        //GameManager.Instance.GameInit += Initialize;
+        Invoke("Initialize", 1f);
     }
 
     IEnumerator SpawnCar()
     {
         float[] zOffsets = { -4, -2, 2, 4, 6, 8 }; // Z축 오프셋 배열
+
 
         yield return new WaitForSeconds(0.5f);
 

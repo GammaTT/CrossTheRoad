@@ -10,6 +10,7 @@ public class ObjectPool : MonoBehaviour
         public string tag;
         public int size;
         public GameObject prefab;
+        public ObstacleData obstacleData;
     }
 
     public List<Pool> pools = new List<Pool>();

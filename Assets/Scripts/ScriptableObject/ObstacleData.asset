@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeccf756128baa34b8c95850ce1e00eb, type: 3}
+  m_Name: ObstacleData
+  m_EditorClassIdentifier: 
+  minSpeed: 0
+  maxSpeed: 0
+  originPrefab: {fileID: 9120438044326283086, guid: 94cb6f8799ccd0842a6bd1872c4cc573, type: 3}
+  carPrefabs:
+  - {fileID: 5252282590161985829, guid: 99ee31fab8b899c4c87f881a5d4559c6, type: 3}
+  - {fileID: 2983907603227599703, guid: 5f202a3ee40bc3c46b641001b928c77f, type: 3}
+  - {fileID: 4594723643141070574, guid: eb9208e05f52d744ab3a64ed4f61a538, type: 3}
+  - {fileID: 4227729958174960173, guid: 630c92722b5c09b409341ceb1beeacda, type: 3}
+  - {fileID: 7504093938238815844, guid: 607b79ed12cd6f047acb8bc18496b761, type: 3}
+  boxColliderSize: {x: 1.3223491, y: 0.82509005, z: 3.2745528}
+  boxColliderCenter: {x: 0.057586133, y: 0.65503675, z: -0.13146722}
+  boxColliderIsTrigger: 1

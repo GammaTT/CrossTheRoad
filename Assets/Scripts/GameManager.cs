@@ -9,14 +9,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public Player player;
-    public Action GameInit;
     public ObjectPool ObjectPool {  get; private set; }
 
     public GameObject gameOverUI;
 
+    Score score;
+
     private void Awake()
     {
         Instance = this;
+        score = GetComponent<Score>();
         ObjectPool = GetComponentInChildren<ObjectPool>();
 
         DontDestroyOnLoad(gameObject);
@@ -27,7 +29,9 @@ public class GameManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
-        GameInit?.Invoke();
+        score.player = player;
+
+        player.controller.MoveAction += score.AddAndSetScore;
     }
 
     public void GameOver()
