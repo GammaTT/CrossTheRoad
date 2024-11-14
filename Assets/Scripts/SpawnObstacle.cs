@@ -64,7 +64,11 @@ public class SpawnObstacle : MonoBehaviour
                     obj.GetComponent<ObstacleController>().SetDestination(spawnPosition1, false);
                 }
 
-                Debug.Log("foreach");
+                //리트라이시 플레이어와 가깝게 생성되는 현상
+                if (Vector3.Distance(obj.transform.position, playerTransform.position) < 0.1f)
+                {
+                    obj.SetActive(false);
+                }
             }
 
             yield return new WaitForSeconds(spawnCarDelay);

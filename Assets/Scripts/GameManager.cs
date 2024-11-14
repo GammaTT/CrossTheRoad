@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     Score score;
 
+    public float gameTime;
+
     private void Awake()
     {
         Instance = this;
@@ -32,6 +34,13 @@ public class GameManager : MonoBehaviour
         score.player = player;
 
         player.controller.MoveAction += score.AddAndSetScore;
+
+        gameTime = 0f;
+    }
+
+    private void Update()
+    {
+        gameTime += Time.deltaTime;
     }
 
     public void GameOver()
@@ -42,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void Retry()
     {
+        gameTime = 0f;
         SceneManager.LoadScene("SampleScene");
         gameOverUI.SetActive(false);
     }

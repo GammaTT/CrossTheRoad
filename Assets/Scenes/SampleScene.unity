@@ -1448,7 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82b5e400f87e01408624509b1855328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCarDelay: 2
+  spawnCarDelay: 2.5
   spawnDistance: 16
   ObjectPool: {fileID: 0}
 --- !u!1 &1792247793

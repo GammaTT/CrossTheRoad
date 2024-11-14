@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class ObstacleController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeedMin;
-    [SerializeField] private float moveSpeedMax;
+    public float moveSpeedMin;
+    public float moveSpeedMax;
     [SerializeField] private float moveSpeed;
 
     [SerializeField] private float moveDistance = 15f;

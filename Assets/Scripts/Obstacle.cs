@@ -28,12 +28,21 @@ public class Obstacle : MonoBehaviour
         carMeshBox.size = data.boxColliderSize;
         carMeshBox.center = data.boxColliderCenter;
         carMeshBox.isTrigger = data.boxColliderIsTrigger;
+
+        obstacleController.moveSpeedMin = data.minSpeed;
+        obstacleController.moveSpeedMax = data.maxSpeed;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player))
         {
+            //시작한지 1초 미만
+            if (GameManager.Instance.gameTime < 1.0f)
+            {
+                return;
+            }
+
             GameManager.Instance.GameOver();
             gameObject.SetActive(false);
         }

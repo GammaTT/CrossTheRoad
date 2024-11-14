@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeccf756128baa34b8c95850ce1e00eb, type: 3}
   m_Name: ObstacleData
   m_EditorClassIdentifier: 
-  minSpeed: 0
-  maxSpeed: 0
+  minSpeed: 4
+  maxSpeed: 8
   originPrefab: {fileID: 9120438044326283086, guid: 94cb6f8799ccd0842a6bd1872c4cc573, type: 3}
   carPrefabs:
   - {fileID: 5252282590161985829, guid: 99ee31fab8b899c4c87f881a5d4559c6, type: 3}
